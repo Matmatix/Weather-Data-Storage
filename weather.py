@@ -2,14 +2,11 @@ import pyowm
 
 owm = pyowm.OWM('88f5340678957b9b848effa6c8527802')  # You MUST provide a valid API key
 
-# Have a pro subscription? Then use:
-# owm = pyowm.OWM(API_key='your-API-key', subscription_type='pro')
 
-# Search for current weather in London (Great Britain)
+# Search for current weather in Milwaukee (United States)
 observation = owm.weather_at_place('Milwaukee,US')
 w = observation.get_weather()
-print(observation)                      # <Weather - reference time=2013-12-18 09:20,
-                              # status=Clouds>
+print(w.get_temperature('fahrenheit'))
 
 # Weather details
 w.get_wind()                  # {'speed': 4.6, 'deg': 330}
