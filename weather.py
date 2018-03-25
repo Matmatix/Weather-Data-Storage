@@ -6,7 +6,10 @@ owm = pyowm.OWM('88f5340678957b9b848effa6c8527802')  # You MUST provide a valid 
 # Search for current weather in Milwaukee (United States)
 observation = owm.weather_at_place('Milwaukee,US')
 w = observation.get_weather()
-print(w.get_temperature('fahrenheit'))
+today = w.get_temperature('fahrenheit')
+
+#print(today)
+print("Current Temp in Milwaukee: {0}".format((today.get('temp'))))
 
 # Weather details
 w.get_wind()                  # {'speed': 4.6, 'deg': 330}
