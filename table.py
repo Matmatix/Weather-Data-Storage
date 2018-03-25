@@ -35,7 +35,19 @@ class HashTable:
             self.slots[location] = update 
         else:                                                   #if there is a list there look through the list to find the object to replace
             for x in range(0, len(self.slots[location])):
-                if self.slots[location].getKey == key:          #compate the key provided to update to the each objects in the list's key
-                    self.slots[location] = update
+                if self.slots[location][x].getKey == key:          #compate the key provided to update to the each objects in the list's key
+                    self.slots[location][x] = update
                     break
+
+    #looking for the location of a specific object
+    def search(self, key):
+        location = self.hashLocation(key)
+        if self.slots[location] == None:                    #return an error if the object associated with the key doesnt exist in the table                
+            return None
+        elif type(self.slots[location]) != list:            #if there is only an object return that object
+            return self.slots[location] 
+        else:                                               #if there is a list traverse it and compare keys looking for the same key
+            for x in range(0, len(self.slots[location])):
+                if self.slots[location][x].getKey == key:
+                    return self.slots[location][x]
 
