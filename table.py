@@ -14,7 +14,7 @@ class HashTable:
     def hashLocation(self, key):
         #use the hash number to specify which algorithm to use to hash the key
         #ie use the hasing class maybe
-        if self.hash == 0:
+        if self.hash == 0:                  #simplest version everything goes to the first slot
             return 0
 
     #add a new object to the table
