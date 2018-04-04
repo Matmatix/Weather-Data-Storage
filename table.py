@@ -50,4 +50,3 @@ class HashTable:
             for x in range(0, len(self.slots[location])):
                 if self.slots[location][x].getKey == key:
                     return self.slots[location][x]
-
