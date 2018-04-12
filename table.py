@@ -2,9 +2,9 @@
 
 class HashTable:
     def __init__(self, length, newHash):
-        if isinstance(length) != int or length <= 0: #make the table at least one long
+        if not isinstance(length, int) or length <= 0: #make the table at least one long
             length = 1
-        if isinstance(newHash) != int or newHash < 0 or newHash > 1:           #this integer value(can possibly change later) will be used to choose a hashing alogrithm for this specific hash table
+        if  not isinstance(newHash, int) or newHash < 0 or newHash > 1:           #this integer value(can possibly change later) will be used to choose a hashing alogrithm for this specific hash table
             newHash = 0
         self.newHash = newHash
         self.length = length
@@ -22,7 +22,7 @@ class HashTable:
         location = self.hashLocation(key)                       #get the location to hash to
         if self.slots[location] is None:                        #check if the slot is filled if not add the object
             self.slots[location] = obj
-        elif isinstance(self.slots[location]) != list:             #if the slot already has a singular object in it replace with a list
+        elif not isinstance(self.slots[location], list):             #if the slot already has a singular object in it replace with a list
             temp = self.slots[location]
             self.slots[location] = [temp, obj]
         else:                                                   #if already a list append object to the end of the list
@@ -31,7 +31,7 @@ class HashTable:
     #update data that is already in the hash table
     def update(self, key, update):
         location = self.hashLocation(key)                  #if there is nothing to replace do nothing
-        if isinstance(self.slots[location]) != list:             #if there is only a single object there replace it
+        if not isinstance(self.slots[location], list):             #if there is only a single object there replace it
             self.slots[location] = update
         else:                                                   #if there is a list there look through the list to find the object to replace
             for x in range(0, len(self.slots[location])):
@@ -44,7 +44,7 @@ class HashTable:
         location = self.hashLocation(key)
         if self.slots[location] is None:                    #return an error if the object associated with the key doesnt exist in the table
             return None
-        elif isinstance(self.slots[location]) != list:            #if there is only an object return that object
+        elif not isinstance(self.slots[location], list):            #if there is only an object return that object
             return self.slots[location]
         else:                                               #if there is a list traverse it and compare keys looking for the same key
             for x in range(0, len(self.slots[location])):
