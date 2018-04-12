@@ -1,12 +1,9 @@
 #This will be the class for the hash table
 
 class HashTable:
-    def __init__(self, length, newHash):
+    def __init__(self, length):
         if not isinstance(length, int) or length <= 0: #make the table at least one long
             length = 1
-        if  not isinstance(newHash, int) or newHash < 0 or newHash > 1:           #this integer value(can possibly change later) will be used to choose a hashing alogrithm for this specific hash table
-            newHash = 0
-        self.newHash = newHash
         self.length = length
         self.slots = [None for _ in range(0, self.length)]      #create a list of all of the slots for objects in the table, possibly other lists in each spot as we are chaining
 
@@ -14,8 +11,7 @@ class HashTable:
     def hashLocation(self, key):
         #use the hash number to specify which algorithm to use to hash the key
         #ie use the hasing class maybe
-        if self.newHash == 0:                  #simplest version everything goes to the first slot
-            return 0
+        return key % self.length
 
     #add a new object to the table
     def add(self, key, obj):
