@@ -20,9 +20,9 @@ class HashTable:
             self.slots[location] = obj
         elif not isinstance(self.slots[location], list):             #if the slot already has a singular object in it replace with a list
             temp = self.slots[location]
-            self.slots[location] = [temp, obj]
+            self.slots[location] = [obj, temp]
         else:                                                   #if already a list append object to the end of the list
-            self.slots[location].append(obj)
+            self.slots[location].insert(0, obj)
 
     #update data that is already in the hash table
     def update(self, key, update):
@@ -31,7 +31,7 @@ class HashTable:
             self.slots[location] = update
         else:                                                   #if there is a list there look through the list to find the object to replace
             for x in range(0, len(self.slots[location])):
-                if self.slots[location][x].getKey == key:          #compate the key provided to update to the each objects in the list's key
+                if self.slots[location][x].key == key:          #compate the key provided to update to the each objects in the list's key
                     self.slots[location][x] = update
                     break
 
@@ -44,5 +44,20 @@ class HashTable:
             return self.slots[location]
         else:                                               #if there is a list traverse it and compare keys looking for the same key
             for x in range(0, len(self.slots[location])):
-                if self.slots[location][x].getKey == key:
+                if self.slots[location][x].key == key:
                     return self.slots[location][x]
+
+    def remove(self, key):
+        location = self.hashLocation(key)
+        if self.slots[location] is None:                    #return an error if the object associated with the key doesnt exist in the table
+            return 0
+        elif not isinstance(self.slots[location], list):            #if there is only an object return that object
+            self.slots[location] = None
+        else:                                               #if there is a list traverse it and compare keys looking for the same key
+            for x in range(len(self.slots[location])):
+                if self.slots[location][x].key == key:
+                    if len(self.slots[location]) == 1:
+                        self.slots[location] = None
+                    else:
+                        self.slots[location].pop(x)
+                        break
