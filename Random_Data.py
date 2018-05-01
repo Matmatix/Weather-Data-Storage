@@ -4,9 +4,10 @@
 from random import *
 
 write = open("data.txt", "w")
+seed(a = None)
 
 for loc in range(3):
-    for day in range(365):
+    for day in range(360):
         if (day/30) == 0:     #temps for january
             temp = 22.5
             variation = 13.5
@@ -68,8 +69,8 @@ for loc in range(3):
             month = "12"
             day = (day % 30)
 
-        rand = .01 * randint(0, 101)    #Generate percentage offset
-        if randint(0, 2) == 0:           #positive or negative increase
+        rand = .01 * randint(0, 100)    #Generate percentage offset
+        if randint(0, 1) == 0:           #positive or negative increase
             rand *= -1
         
         temp = temp + (variation * rand)    #Caculcate temperature
